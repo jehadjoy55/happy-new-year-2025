@@ -1,81 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Poppins:wght@900&display=swap");
+
+/* Universal Reset */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 100ms ease-in;
+}
+
 body {
   background-color: #1a1818;
   overflow: hidden;
   height: 100vh;
-  margin: 0;
 }
 
+/* Message Section */
 .msg {
-  width: 90%;
+  width: 100%;
   font-family: "Bilbo Swash Caps", cursive;
-  font-size: 10vw; /* Responsive font size */
+  font-size: 8vw; /* Adjust font size for responsiveness */
   font-weight: bolder;
   color: #ff0000;
   text-align: center;
   position: absolute;
-  top: 40%;
-  left: 5%;
+  top: 50%;
   opacity: 0;
   animation: message 2s ease-in-out 6s forwards;
 }
 
+@keyframes message {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.y1, .y2, .y3, .y4 {
+  color: #fff;
+  animation: colorful-animation 2s ease-in-out 5.75s forwards;
+}
+
+/* Animations for each digit */
+@keyframes colorful-animation {
+  0% {
+    color: #fff;
+  }
+  100% {
+    color: rgb(247, 0, 255);
+  }
+}
+
+/* Year Animation */
+.year {
+  position: absolute;
+  top: 70%;
+  width: 100%;
+  text-align: center;
+}
+
 .year > span {
-  font-size: 20vw; /* Responsive font size for the year */
+  font-size: 15vw; /* Adjust font size for responsiveness */
   font-weight: 700;
   font-family: "Poppins", sans-serif;
-  letter-spacing: -2vw;
+  letter-spacing: -2px;
 }
 
+.old {
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  animation: old_animation 2.5s ease-in-out 4s forwards;
+  margin-left: -80px;
+}
+
+@keyframes old_animation {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: -250%;
+  }
+}
+
+.new {
+  position: absolute;
+  right: -100px;
+  animation: new_animation 5s ease-in-out 1.5s forwards;
+}
+
+@keyframes new_animation {
+  0% {
+    right: -100px;
+  }
+  40% {
+    right: 30%;
+  }
+  90% {
+    right: 30%;
+  }
+  100% {
+    right: 40%;
+    color: yellow;
+  }
+}
+
+/* Balloon Animation */
 .balloon {
-  width: 10vw; /* Responsive balloon size */
+  width: 10vw;
   height: 12vw;
+  border-radius: 50%;
+  background-color: rgb(0, 47, 255);
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  animation: balloon_animation 5s ease-in-out 1.5s forwards;
 }
 
+.balloon::after {
+  content: "";
+  width: 2px;
+  height: 8vw;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8vw;
+}
+
+.balloon::before {
+  content: "";
+  border-style: solid;
+  border-width: 0 5px 10px 5px;
+  border-color: transparent transparent #fd3553 transparent;
+  position: absolute;
+  left: 50%;
+  bottom: -2vw;
+  transform: translateX(-50%);
+}
+
+@keyframes balloon_animation {
+  0% {
+    right: -100px;
+  }
+  40% {
+    right: 30%;
+  }
+  50% {
+    right: 40%;
+    top: 50%;
+  }
+  100% {
+    right: 40%;
+    top: -100%;
+  }
+}
+
+/* Fireworks */
 .firework {
   position: relative;
   opacity: 0;
   animation: show_fireworks 2s ease-in-out 5s forwards;
 }
 
-@media (max-width: 768px) {
-  .msg {
-    font-size: 8vw; /* Adjust font size for smaller screens */
+@keyframes show_fireworks {
+  0% {
+    opacity: 0;
   }
-
-  .year > span {
-    font-size: 15vw; /* Reduce year size for smaller screens */
+  99% {
+    opacity: 0;
   }
-
-  .balloon {
-    width: 8vw;
-    height: 10vw;
-  }
-
-  .firework {
-    transform: scale(0.7); /* Scale fireworks to fit smaller screens */
+  100% {
+    opacity: 1;
   }
 }
 
-@media (max-width: 480px) {
-  .msg {
-    font-size: 6vw; /* Further reduce for very small screens */
-  }
+.cracker {
+  position: absolute;
+  width: 2px;
+  height: 8vw;
+  transform-origin: 50% 100%;
+}
 
-  .year > span {
-    font-size: 12vw;
-  }
+.cracker::before {
+  content: "";
+  background-color: gold;
+  height: 4vw;
+  width: 100%;
+  position: absolute;
+  animation: fire 2s ease-in-out infinite;
+}
 
-  .balloon {
-    width: 6vw;
-    height: 8vw;
+@keyframes fire {
+  0% {
+    top: 100%;
   }
-
-  #firework1, #firework2, #firework3 {
-    top: auto;
-    transform: scale(0.5); /* Smaller fireworks */
+  50% {
+    top: -50%;
+  }
+  100% {
+    top: -50%;
   }
 }
 
+/* Firework Positions */
+#firework1 {
+  left: 25%;
+  top: 50%;
+  transform: scale(1);
+}
+
+#firework2 {
+  left: 50%;
+  top: 75%;
+  transform: scale(0.7);
+}
+
+#firework3 {
+  left: 80%;
+  top: 15%;
+  transform: scale(1.2);
+}
+
+/* Canvas for Background Effects */
 canvas {
   position: fixed;
   top: 0;
